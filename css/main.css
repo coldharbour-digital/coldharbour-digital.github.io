@@ -147,6 +147,10 @@ h5 {
 h6 {
   font-size: 0.6rem; }
 
+#header {
+  color: #303030;
+  font-weight: 600; }
+
 @media screen and (max-width: 736px) {
   h1 {
     font-size: 1.75rem;
