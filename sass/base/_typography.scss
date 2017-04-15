@@ -82,6 +82,11 @@
 		}
 	}
 
+	header h1 {
+		text-transform: none;
+		font-family: _font(family-brand);
+        }
+
 	h1 {
 		font-size: 2.25rem;
 		line-height: 1.3;
