@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Coldharbour Digital</title>
+    <link>http://coldharbourdigital.com/blog/tags/</link>
+    <description>Recent content in Tags on Coldharbour Digital</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>Powered by [Hugo](//gohugo.io). Theme by [PPOffice](http://github.com/ppoffice).</copyright>
+    <lastBuildDate>Tue, 18 Apr 2017 17:30:00 +1200</lastBuildDate>
+    
+	<atom:link href="http://coldharbourdigital.com/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Biocontainers</title>
+      <link>http://coldharbourdigital.com/blog/tags/biocontainers/</link>
+      <pubDate>Tue, 18 Apr 2017 17:30:00 +1200</pubDate>
+      
+      <guid>http://coldharbourdigital.com/blog/tags/biocontainers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rkt</title>
+      <link>http://coldharbourdigital.com/blog/tags/rkt/</link>
+      <pubDate>Tue, 18 Apr 2017 17:30:00 +1200</pubDate>
+      
+      <guid>http://coldharbourdigital.com/blog/tags/rkt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rktrunner</title>
+      <link>http://coldharbourdigital.com/blog/tags/rktrunner/</link>
+      <pubDate>Tue, 18 Apr 2017 17:30:00 +1200</pubDate>
+      
+      <guid>http://coldharbourdigital.com/blog/tags/rktrunner/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

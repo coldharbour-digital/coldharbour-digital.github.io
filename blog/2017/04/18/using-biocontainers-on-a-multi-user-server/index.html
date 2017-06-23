@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+    <title>Using BioContainers on a multi-user server &middot; Coldharbour Digital</title>
+    <meta name="generator" content="Hugo 0.25-DEV" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Simon Guest">
+    
+      <meta name="description" content="">
+    
+    
+    <link rel="canonical" href="http://coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/"/>
+    <link rel="icon" href="http://coldharbourdigital.com/blog/favicon.ico">
+    <link rel="apple-touch-icon" href="http://coldharbourdigital.com/blog/apple-touch-icon.png"/>
+    <link rel="stylesheet" href="http://coldharbourdigital.com/blog/css/style.css">
+    <link rel="stylesheet" href="http://coldharbourdigital.com/blog/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://coldharbourdigital.com/blog/css/monokai.css">
+    <link rel="stylesheet" href="http://coldharbourdigital.com/blog/fancybox/jquery.fancybox.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <meta property="og:title" content="Using BioContainers on a multi-user server" />
+<meta property="og:description" content="Bioinformatics users are a demanding bunch. They need to be able to run a large variety of applications on powerful servers. These servers may be administered by a small team of sysadmins, who quickly become a bottleneck in packaging and installing applications for the local users. Using application packaging such as RPM can make the task manageable, but there is still a per-application overhead on the sysadmin, and with a typical site using perhaps in excess of 300 applications, this becomes unmanageable." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/" />
+
+
+
+<meta property="article:published_time" content="2017-04-18T17:30:00&#43;12:00"/>
+<meta property="article:modified_time" content="2017-04-18T17:30:00&#43;12:00"/>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+<meta itemprop="name" content="Using BioContainers on a multi-user server">
+<meta itemprop="description" content="Bioinformatics users are a demanding bunch. They need to be able to run a large variety of applications on powerful servers. These servers may be administered by a small team of sysadmins, who quickly become a bottleneck in packaging and installing applications for the local users. Using application packaging such as RPM can make the task manageable, but there is still a per-application overhead on the sysadmin, and with a typical site using perhaps in excess of 300 applications, this becomes unmanageable.">
+
+
+<meta itemprop="dateModified" content="2017-04-18T17:30:00&#43;12:00" />
+<meta itemprop="wordCount" content="565">
+
+
+
+<meta itemprop="keywords" content="biocontainers,rkt,rktrunner," />
+
+    
+
+  <meta name="twitter:card" content="summary"/>
+
+
+
+<meta name="twitter:text:title" content="Using BioContainers on a multi-user server"/>
+<meta name="twitter:title" content="Using BioContainers on a multi-user server"/>
+<meta name="twitter:description" content="Bioinformatics users are a demanding bunch. They need to be able to run a large variety of applications on powerful servers. These servers may be administered by a small team of sysadmins, who quickly become a bottleneck in packaging and installing applications for the local users. Using application packaging such as RPM can make the task manageable, but there is still a per-application overhead on the sysadmin, and with a typical site using perhaps in excess of 300 applications, this becomes unmanageable."/>
+
+
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	<header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="http://coldharbourdigital.com/blog/" id="logo">
+          
+          <i class="logo" style="background-image: url('http://coldharbourdigital.com/blog/images/cogs.png')"></i>
+          
+          <span class="site-title">Coldharbour Digital</span>
+      </a>
+      <nav id="main-nav">
+          
+
+          
+
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://coldharbourdigital.com/blog/images/cogs.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="sitesearch" value="http://coldharbourdigital.com/blog/" />
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+
+          
+
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="sitesearch" value="http://coldharbourdigital.com/blog/" />
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+   	
+    	<aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      
+      <img id="avatar" src="http://coldharbourdigital.com/blog/images/cogs.png">
+      
+      <h2 id="name">Simon Guest</h2>
+      <h3 id="title">Coldharbour Digital</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>New Zealand</span>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        1
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          3
+        
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="profile-block social-links">
+      <table>
+        <tr>
+          
+<td><a href="//github.com/tesujimath" target="_blank" title="GitHub"><i class="fa fa-github"></i></a></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <td><a href="http://coldharbourdigital.com/blog/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+    
+
+    <section id="main">
+    
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+
+        <header class="article-header">
+    <a href="http://coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/">
+    <h1 class="article-title" itemprop="name">
+        Using BioContainers on a multi-user server
+    </h1>
+    </a>
+    <div class="article-meta">
+
+        
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2017-04-18 17:30:00 &#43;1200 NZST" itemprop="datePublished">2017-04-18</time>
+            &middot;
+            565
+            words
+            &middot;
+            3
+            minute read
+        </div>
+        
+        
+            
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                
+                <a class="article-category-link" href="http://coldharbourdigital.com/blog/tags/biocontainers">BioContainers</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="http://coldharbourdigital.com/blog/tags/rkt">rkt</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="http://coldharbourdigital.com/blog/tags/rktrunner">rktrunner</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+
+        <div class="article-entry" itemprop="articleBody">
+            
+
+<p>Bioinformatics users are a demanding bunch.  They need to be able to run a large variety of applications on powerful servers.  These servers may be administered by a small team of sysadmins, who quickly become a bottleneck in packaging and installing applications for the local users.  Using application packaging such as RPM can make the task manageable, but there is still a per-application overhead on the sysadmin, and with a typical site using perhaps in excess of 300 applications, this becomes unmanageable.</p>
+
+<p>Enter <a href="http://biocontainers.pro/">BioContainers</a>, an &ldquo;open source and community-driven framework which provides system-agnostic executable environments for bioinformatics software&rdquo;.  Over 2000 bioinformatics applications packaged as containers, and ready to run.</p>
+
+<p>There are two ways to run BioContainers: <a href="https://www.docker.com/">Docker</a> or <a href="https://coreos.com/rkt">rkt</a>.  But pretty quickly, it becomes apparent that as provided, these are only for privileged users.</p>
+
+<p>Docker first.  To run Docker, the user must be in the <em>docker</em> group on the system.  Membership of this group enables the user to run any docker command, with any parameters.  Including downloading any container image, mounting any host directory into the container, and running it as any user, <em>including root</em>.  Say goodbye to any idea of filesystem integrity on a multi-user server.</p>
+
+<p>Rkt is similar.  Images may be fetched by unprivileged users, but to actually run an image, it is necessary to be <em>root</em>.</p>
+
+<p>After raising <a href="https://github.com/BioContainers/containers/issues/147">an issue</a> about this on the BioContainers Github site, it emerged that the <a href="https://bitbucket.org/osallou/go-docker">Go-Docker</a> utility had been developed to address this issue for users of Docker.  Go-Docker appears to be fairly featureful, and manages job submission for job scheduling systems such as Sun Grid Engine, Torque, etc.  We considered using this, but decided the overhead of assimilating such a tool would be considerable.</p>
+
+<p>So we decided to write <a href="https://github.com/tesujimath/rktrunner">rktrunner</a> a &ldquo;rkt run front-end for unprivileged users&rdquo;, that is, a simple wrapper for <code>rkt run</code>.</p>
+
+<h1 id="rktrunner">Rktrunner</h1>
+
+<p><a href="https://github.com/tesujimath/rktrunner">Rktrunner</a> provides the <code>rkt-run</code> command, which is installed <em>setuid-root</em>, and wraps the underlying <code>rkt</code> program, carefully managing its command-line parameters, as defined by the local sysadmin in a site-wide config file.</p>
+
+<p>A simple configuration of <em>rktrunner</em> enables any user to run any container as themselves, with their home directory mounted in the container.  The config file for that looks like this:</p>
+
+<pre><code>rkt = &quot;/usr/bin/rkt&quot;
+
+[environment]
+HOME = &quot;/home/{{.Username}}&quot;
+
+[options.common]
+general = [&quot;--insecure-options=image&quot;]
+run = [&quot;--net=host&quot;]
+image = [
+    &quot;--user={{.Uid}}&quot;,
+    &quot;--group={{.Gid}}&quot;,
+]
+
+[volume.home]
+volume = &quot;kind=host,source={{.HomeDir}}&quot;
+mount = &quot;target=/home/{{.Username}}&quot;
+</code></pre>
+
+<p>With this config file, the following <code>rkt-run</code> command by an unprivleged user:</p>
+
+<pre><code>$ rkt-run -e bwa quay.io/biocontainers/bwa:0.7.15--0
+</code></pre>
+
+<p>results in the following invocation of <code>rkt</code>:</p>
+
+<pre><code>/usr/bin/rkt --insecure-options=image run --set-env-file /tmp/rktrunner32678/env --net=host \
+--volume home,kind=host,source=/home/guestsi quay.io/biocontainers/bwa:0.7.15--0 \
+--mount volume=home,target=/home/guestsi --user=511 --group=511 --exec bwa --
+</code></pre>
+
+<h2 id="aliases">Aliases</h2>
+
+<p>While an improvement over the full <code>rkt</code> command, that <code>rkt-run</code> invocation is still fairly cumbersome.  So <em>rktrunner</em> allows the sysadmin to define aliases, for example:</p>
+
+<pre><code>[alias.bwa_]
+image = &quot;quay.io/biocontainers/bwa:0.7.15--0&quot;
+exec = [&quot;bwa&quot;]
+</code></pre>
+
+<p>This means that the same <code>rkt</code> command may be run by typing:</p>
+
+<pre><code>$ rkt-run bwa
+</code></pre>
+
+<p>Note that aliases provide a simple way for the sysadmin to provide easily accessible default versions of standard programs like <em>bwa</em>.</p>
+
+<h2 id="wrapper-scripts">Wrapper scripts</h2>
+
+<p>However, a project user may not want to be tied to what the sysadmin has provided.  They could run their own version of <em>bwa</em>, say, via a wrapper script or shell function.  Here&rsquo;s a simple wrapper script, which would be saved in a file called <em>bwa</em> somewhere on the project path:</p>
+
+<pre><code>#!/bin/sh
+exec rkt-run -e bwa quay.io/biocontainers/bwa:0.7.15--0 &quot;$@&quot;
+</code></pre>
+
+        </div>
+        <footer class="article-footer">
+    <a data-url="http://coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/" data-id="1a4dc251f69b73df80aaf160c4a56765" class="article-share-link">
+        <i class="fa fa-share"></i>
+        Share
+    </a>
+    
+
+    <script>
+    (function ($) {
+        
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+    </script>
+</footer>
+
+    </div>
+
+    
+
+</article>
+
+
+
+    </section>
+
+   	
+    	<aside id="sidebar">
+    
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Recents
+    </h3>
+    <div class="widget">
+        <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/" class="thumbnail">
+                    
+                        <span class="thumbnail-image thumbnail-none"></span>
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    
+                    
+                    <p class="item-title"><a href="http://coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/" class="title">Using BioContainers on a multi-user server</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-04-18 17:30:00 &#43;1200 NZST" itemprop="datePublished">2017-04-18</time>
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+    
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="http://coldharbourdigital.com/blog/tags/biocontainers">
+                    biocontainers
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="http://coldharbourdigital.com/blog/tags/rkt">
+                    rkt
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="http://coldharbourdigital.com/blog/tags/rktrunner">
+                    rktrunner
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+
+    
+
+
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+    
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017
+      Powered by <a href="//gohugo.io">Hugo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+    </div>
+  </div>
+</footer>
+
+
+<script src="http://coldharbourdigital.com/blog/fancybox/jquery.fancybox.pack.js"></script>
+<script src="http://coldharbourdigital.com/blog/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+</body>
+</html>
