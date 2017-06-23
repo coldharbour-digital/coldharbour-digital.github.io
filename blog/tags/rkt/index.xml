@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rkt on Coldharbour Digital</title>
-    <link>http://coldharbourdigital.com/blog/tags/rkt/</link>
+    <link>http://www.coldharbourdigital.com/blog/tags/rkt/</link>
     <description>Recent content in Rkt on Coldharbour Digital</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <copyright>Powered by [Hugo](//gohugo.io). Theme by [PPOffice](http://github.com/ppoffice).</copyright>
     <lastBuildDate>Tue, 18 Apr 2017 17:30:00 +1200</lastBuildDate>
     
-	<atom:link href="http://coldharbourdigital.com/blog/tags/rkt/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://www.coldharbourdigital.com/blog/tags/rkt/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Using BioContainers on a multi-user server</title>
-      <link>http://coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/</link>
+      <link>http://www.coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/</link>
       <pubDate>Tue, 18 Apr 2017 17:30:00 +1200</pubDate>
       
-      <guid>http://coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/</guid>
+      <guid>http://www.coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/</guid>
       <description>Bioinformatics users are a demanding bunch. They need to be able to run a large variety of applications on powerful servers. These servers may be administered by a small team of sysadmins, who quickly become a bottleneck in packaging and installing applications for the local users. Using application packaging such as RPM can make the task manageable, but there is still a per-application overhead on the sysadmin, and with a typical site using perhaps in excess of 300 applications, this becomes unmanageable.</description>
     </item>
     

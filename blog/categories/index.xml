@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Coldharbour Digital</title>
-    <link>http://coldharbourdigital.com/blog/categories/</link>
+    <link>http://www.coldharbourdigital.com/blog/categories/</link>
     <description>Recent content in Categories on Coldharbour Digital</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <copyright>Powered by [Hugo](//gohugo.io). Theme by [PPOffice](http://github.com/ppoffice).</copyright>
     
-	<atom:link href="http://coldharbourdigital.com/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://www.coldharbourdigital.com/blog/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>
