@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-gb">
 <head>
-    <title>Coldharbour Digital</title>
+    <title>Docker &middot; Coldharbour Digital</title>
     <meta name="generator" content="Hugo 0.25-DEV" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -10,10 +10,10 @@
       <meta name="description" content="">
     
     
-      <link href="http://www.coldharbourdigital.com/blog/index.xml" rel="alternate" type="application/rss+xml" title="Coldharbour Digital" />
-      <link href="http://www.coldharbourdigital.com/blog/index.xml" rel="feed" type="application/rss+xml" title="Coldharbour Digital" />
+      <link href="http://www.coldharbourdigital.com/blog/tags/docker/index.xml" rel="alternate" type="application/rss+xml" title="Coldharbour Digital" />
+      <link href="http://www.coldharbourdigital.com/blog/tags/docker/index.xml" rel="feed" type="application/rss+xml" title="Coldharbour Digital" />
     
-    <link rel="canonical" href="http://www.coldharbourdigital.com/blog/"/>
+    <link rel="canonical" href="http://www.coldharbourdigital.com/blog/tags/docker/"/>
     <link rel="icon" href="http://www.coldharbourdigital.com/blog/favicon.ico">
     <link rel="apple-touch-icon" href="http://www.coldharbourdigital.com/blog/apple-touch-icon.png"/>
     <link rel="stylesheet" href="http://www.coldharbourdigital.com/blog/css/style.css">
@@ -23,10 +23,10 @@
     
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <meta property="og:title" content="Coldharbour Digital" />
+    <meta property="og:title" content="Docker" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://www.coldharbourdigital.com/blog/" />
+<meta property="og:url" content="http://www.coldharbourdigital.com/blog/tags/docker/" />
 
 
 
@@ -43,7 +43,7 @@
 
     
     
-<meta itemprop="name" content="Coldharbour Digital">
+<meta itemprop="name" content="Docker">
 <meta itemprop="description" content="">
 
 
@@ -221,156 +221,44 @@
     <section id="main">
     
     
-
-<article class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        </a>
-
-        <header class="article-header">
-    <a href="http://www.coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/">
-    <h1 class="article-title" itemprop="name">
-        Using BioContainers on a multi-user server
-    </h1>
-    </a>
-    <div class="article-meta">
-
-        
-        <div class="article-date">
-            <i class="fa fa-calendar"></i>
-            <time datetime="2017-04-18 17:30:00 &#43;1200 NZST" itemprop="datePublished">2017-04-18</time>
-            &middot;
-            565
-            words
-            &middot;
-            3
-            minute read
-        </div>
-        
-        
-            
-            
-        
-
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-tags"></i>
-                
-                
-                <a class="article-category-link" href="http://www.coldharbourdigital.com/blog/tags/biocontainers">biocontainers</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="http://www.coldharbourdigital.com/blog/tags/docker">docker</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="http://www.coldharbourdigital.com/blog/tags/rkt">rkt</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="http://www.coldharbourdigital.com/blog/tags/rktrunner">rktrunner</a>
-                
-                
-            </div>
-            
-        
-    </div>
-</header>
-
-        <div class="article-entry" itemprop="articleBody">
-            <p>
-                Bioinformatics users are a demanding bunch. They need to be able to run a large variety of applications on powerful servers. These servers may be administered by a small team of sysadmins, who quickly become a bottleneck in packaging and installing applications for the local users. Using application packaging such as RPM can make the task manageable, but there is still a per-application overhead on the sysadmin, and with a typical site using perhaps in excess of 300 applications, this becomes unmanageable.
-            </p>
-            <p class="article-more-link">
-                <a href="http://www.coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/">
-                    Read more
-                </a>
-            </p>
-        </div>
-        <footer class="article-footer">
-    <a data-url="http://www.coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/" data-id="b8ffdb044b876ea4e3335d44feb38b60" class="article-share-link">
-        <i class="fa fa-share"></i>
-        Share
-    </a>
     
-
-    <script>
-    (function ($) {
-        
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-    </script>
-</footer>
-
+    
+    <section class="archives-wrap">
+        <div class="archive-category-wrap">
+            <span class="archive-category">Docker</span>
+        </div>
+        <div class="archives">
+            
+            
+                <article class="archive-article archive-type-post">
+    <div class="archive-article-inner">
+        <div class="archive-article-thumbnail">
+            
+            <a href="http://www.coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/" class="thumbnail">
+                <span style="background-image:url(http://www.coldharbourdigital.com/blog/)" alt="Using BioContainers on a multi-user server" class="thumbnail-image"></span>
+            </a>
+            
+        </div>
+        <header class="archive-article-header">
+            <h1 itemprop="name">
+            <a class="archive-article-title" href="http://www.coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/">Using BioContainers on a multi-user server</a>
+            </h1>
+            <div class="archive-article-date">
+                <i class="fa fa-calendar"></i>
+                <time datetime="2017-04-18 17:30:00 &#43;1200 NZST" itemprop="datePublished">2017-04-18</time>
+            </div>
+        </header>
     </div>
 </article>
-
-
-<nav id="page-nav">
+ 
+            
+        </div>
+    </section>
+    <nav id="page-nav">
 
 </nav>
 
+    
 
     </section>
 
