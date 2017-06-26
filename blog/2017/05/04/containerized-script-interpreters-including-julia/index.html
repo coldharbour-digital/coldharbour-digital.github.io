@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-gb">
 <head>
-    <title>Using BioContainers on a multi-user server &middot; Coldharbour Digital</title>
+    <title>Containerized script interpreters, including Julia &middot; Coldharbour Digital</title>
     <meta name="generator" content="Hugo 0.25-DEV" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -10,7 +10,7 @@
       <meta name="description" content="">
     
     
-    <link rel="canonical" href="http://www.coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/"/>
+    <link rel="canonical" href="http://www.coldharbourdigital.com/blog/2017/05/04/containerized-script-interpreters-including-julia/"/>
     <link rel="icon" href="http://www.coldharbourdigital.com/blog/favicon.ico">
     <link rel="apple-touch-icon" href="http://www.coldharbourdigital.com/blog/apple-touch-icon.png"/>
     <link rel="stylesheet" href="http://www.coldharbourdigital.com/blog/css/style.css">
@@ -20,15 +20,17 @@
     
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <meta property="og:title" content="Using BioContainers on a multi-user server" />
-<meta property="og:description" content="Bioinformatics users are a demanding bunch. They need to be able to run a large variety of applications on powerful servers. These servers may be administered by a small team of sysadmins, who quickly become a bottleneck in packaging and installing applications for the local users. Using application packaging such as RPM can make the task manageable, but there is still a per-application overhead on the sysadmin, and with a typical site using perhaps in excess of 300 applications, this becomes unmanageable." />
+    <meta property="og:title" content="Containerized script interpreters, including Julia" />
+<meta property="og:description" content="The ability to easily run containerized applications using rkt is quite intoxicating, and quickly leads on to an exploration of what applications are readily available. Docker Hub and Quay are worth exploring. Among those applications on Docker Hub are Julia and Ruby.
+Noting the slightly non-standard security requirements needed by the Julia interpreter, we can configure rktrunner to run Julia using this configuration file snippet:
+[options.common] image = [ &quot;--seccomp&quot;, &quot;mode=retain,@docker/default-whitelist,mbind&quot;, ] [alias." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/" />
+<meta property="og:url" content="http://www.coldharbourdigital.com/blog/2017/05/04/containerized-script-interpreters-including-julia/" />
 
 
 
-<meta property="article:published_time" content="2017-04-18T17:30:00&#43;12:00"/>
-<meta property="article:modified_time" content="2017-04-18T17:30:00&#43;12:00"/>
+<meta property="article:published_time" content="2017-05-04T17:30:00&#43;12:00"/>
+<meta property="article:modified_time" content="2017-05-04T17:30:00&#43;12:00"/>
 
 
 
@@ -42,12 +44,14 @@
 
     
     
-<meta itemprop="name" content="Using BioContainers on a multi-user server">
-<meta itemprop="description" content="Bioinformatics users are a demanding bunch. They need to be able to run a large variety of applications on powerful servers. These servers may be administered by a small team of sysadmins, who quickly become a bottleneck in packaging and installing applications for the local users. Using application packaging such as RPM can make the task manageable, but there is still a per-application overhead on the sysadmin, and with a typical site using perhaps in excess of 300 applications, this becomes unmanageable.">
+<meta itemprop="name" content="Containerized script interpreters, including Julia">
+<meta itemprop="description" content="The ability to easily run containerized applications using rkt is quite intoxicating, and quickly leads on to an exploration of what applications are readily available. Docker Hub and Quay are worth exploring. Among those applications on Docker Hub are Julia and Ruby.
+Noting the slightly non-standard security requirements needed by the Julia interpreter, we can configure rktrunner to run Julia using this configuration file snippet:
+[options.common] image = [ &quot;--seccomp&quot;, &quot;mode=retain,@docker/default-whitelist,mbind&quot;, ] [alias.">
 
 
-<meta itemprop="dateModified" content="2017-04-18T17:30:00&#43;12:00" />
-<meta itemprop="wordCount" content="565">
+<meta itemprop="dateModified" content="2017-05-04T17:30:00&#43;12:00" />
+<meta itemprop="wordCount" content="399">
 
 
 
@@ -59,9 +63,11 @@
 
 
 
-<meta name="twitter:text:title" content="Using BioContainers on a multi-user server"/>
-<meta name="twitter:title" content="Using BioContainers on a multi-user server"/>
-<meta name="twitter:description" content="Bioinformatics users are a demanding bunch. They need to be able to run a large variety of applications on powerful servers. These servers may be administered by a small team of sysadmins, who quickly become a bottleneck in packaging and installing applications for the local users. Using application packaging such as RPM can make the task manageable, but there is still a per-application overhead on the sysadmin, and with a typical site using perhaps in excess of 300 applications, this becomes unmanageable."/>
+<meta name="twitter:text:title" content="Containerized script interpreters, including Julia"/>
+<meta name="twitter:title" content="Containerized script interpreters, including Julia"/>
+<meta name="twitter:description" content="The ability to easily run containerized applications using rkt is quite intoxicating, and quickly leads on to an exploration of what applications are readily available. Docker Hub and Quay are worth exploring. Among those applications on Docker Hub are Julia and Ruby.
+Noting the slightly non-standard security requirements needed by the Julia interpreter, we can configure rktrunner to run Julia using this configuration file snippet:
+[options.common] image = [ &quot;--seccomp&quot;, &quot;mode=retain,@docker/default-whitelist,mbind&quot;, ] [alias."/>
 
 
     
@@ -241,9 +247,9 @@
         
 
         <header class="article-header">
-    <a href="http://www.coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/">
+    <a href="http://www.coldharbourdigital.com/blog/2017/05/04/containerized-script-interpreters-including-julia/">
     <h1 class="article-title" itemprop="name">
-        Using BioContainers on a multi-user server
+        Containerized script interpreters, including Julia
     </h1>
     </a>
     <div class="article-meta">
@@ -251,12 +257,12 @@
         
         <div class="article-date">
             <i class="fa fa-calendar"></i>
-            <time datetime="2017-04-18 17:30:00 &#43;1200 NZST" itemprop="datePublished">2017-04-18</time>
+            <time datetime="2017-05-04 17:30:00 &#43;1200 NZST" itemprop="datePublished">2017-05-04</time>
             &middot;
-            565
+            399
             words
             &middot;
-            3
+            2
             minute read
         </div>
         
@@ -270,14 +276,6 @@
             
             <div class="article-category">
                 <i class="fa fa-tags"></i>
-                
-                
-                <a class="article-category-link" href="http://www.coldharbourdigital.com/blog/tags/biocontainers">biocontainers</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="http://www.coldharbourdigital.com/blog/tags/docker">docker</a>
-                &middot;
                 
                 
                 <a class="article-category-link" href="http://www.coldharbourdigital.com/blog/tags/rkt">rkt</a>
@@ -294,85 +292,63 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
+            <p>The ability to easily run containerized applications using <a href="https://coreos.com/rkt">rkt</a> is quite intoxicating, and quickly leads on to an exploration of what applications are readily available.  <a href="https://hub.docker.com/">Docker Hub</a> and <a href="https://quay.io/">Quay</a> are worth exploring.  Among those applications on Docker Hub are <a href="https://hub.docker.com/_/julia/">Julia</a> and <a href="https://hub.docker.com/_/ruby/">Ruby</a>.</p>
 
-<p>Bioinformatics users are a demanding bunch.  They need to be able to run a large variety of applications on powerful servers.  These servers may be administered by a small team of sysadmins, who quickly become a bottleneck in packaging and installing applications for the local users.  Using application packaging such as RPM can make the task manageable, but there is still a per-application overhead on the sysadmin, and with a typical site using perhaps in excess of 300 applications, this becomes unmanageable.</p>
+<p>Noting the <a href="https://github.com/rkt/rkt/issues/3651">slightly non-standard security requirements</a> needed by the Julia interpreter, we can configure <a href="https://github.com/tesujimath/rktrunner">rktrunner</a> to run Julia using this configuration file snippet:</p>
 
-<p>Enter <a href="http://biocontainers.pro/">BioContainers</a>, an &ldquo;open source and community-driven framework which provides system-agnostic executable environments for bioinformatics software&rdquo;.  Over 2000 bioinformatics applications packaged as containers, and ready to run.</p>
-
-<p>There are two ways to run BioContainers: <a href="https://www.docker.com/">Docker</a> or <a href="https://coreos.com/rkt">rkt</a>.  But pretty quickly, it becomes apparent that as provided, these are only for privileged users.</p>
-
-<p>Docker first.  To run Docker, the user must be in the <em>docker</em> group on the system.  Membership of this group enables the user to run any docker command, with any parameters.  Including downloading any container image, mounting any host directory into the container, and running it as any user, <em>including root</em>.  Say goodbye to any idea of filesystem integrity on a multi-user server.</p>
-
-<p>Rkt is similar.  Images may be fetched by unprivileged users, but to actually run an image, it is necessary to be <em>root</em>.</p>
-
-<p>After raising <a href="https://github.com/BioContainers/containers/issues/147">an issue</a> about this on the BioContainers Github site, it emerged that the <a href="https://bitbucket.org/osallou/go-docker">Go-Docker</a> utility had been developed to address this issue for users of Docker.  Go-Docker appears to be fairly featureful, and manages job submission for job scheduling systems such as Sun Grid Engine, Torque, etc.  We considered using this, but decided the overhead of assimilating such a tool would be considerable.</p>
-
-<p>So we decided to write <a href="https://github.com/tesujimath/rktrunner">rktrunner</a> a &ldquo;rkt run front-end for unprivileged users&rdquo;, that is, a simple wrapper for <code>rkt run</code>.</p>
-
-<h1 id="rktrunner">Rktrunner</h1>
-
-<p><a href="https://github.com/tesujimath/rktrunner">Rktrunner</a> provides the <code>rkt-run</code> command, which is installed <em>setuid-root</em>, and wraps the underlying <code>rkt</code> program, carefully managing its command-line parameters, as defined by the local sysadmin in a site-wide config file.</p>
-
-<p>A simple configuration of <em>rktrunner</em> enables any user to run any container as themselves, with their home directory mounted in the container.  The config file for that looks like this:</p>
-
-<pre><code>rkt = &quot;/usr/bin/rkt&quot;
-
-[environment]
-HOME = &quot;/home/{{.Username}}&quot;
-
-[options.common]
-general = [&quot;--insecure-options=image&quot;]
-run = [&quot;--net=host&quot;]
+<pre><code>[options.common]
 image = [
-    &quot;--user={{.Uid}}&quot;,
-    &quot;--group={{.Gid}}&quot;,
+    &quot;--seccomp&quot;, &quot;mode=retain,@docker/default-whitelist,mbind&quot;,
 ]
 
-[volume.home]
-volume = &quot;kind=host,source={{.HomeDir}}&quot;
-mount = &quot;target=/home/{{.Username}}&quot;
+[alias.julia_]
+image = &quot;docker://julia&quot;
+exec = [&quot;/usr/local/julia/bin/julia&quot;]
 </code></pre>
 
-<p>With this config file, the following <code>rkt-run</code> command by an unprivleged user:</p>
+<p>Note that this snippet makes use of a <em>rktrunner</em> alias, so that we can invoke containerized Julia very easily.</p>
 
-<pre><code>$ rkt-run -e bwa quay.io/biocontainers/bwa:0.7.15--0
+<pre><code>$ rkt-run -i julia
+               _
+   _       _ _(_)_     |  A fresh approach to technical computing
+  (_)     | (_) (_)    |  Documentation: http://docs.julialang.org
+   _ _   _| |_  __ _   |  Type &quot;?help&quot; for help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 0.5.1 (2017-03-05 13:25 UTC)
+ _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release
+|__/                   |  x86_64-pc-linux-gnu
+
+julia&gt;
 </code></pre>
 
-<p>results in the following invocation of <code>rkt</code>:</p>
+<p>The <code>julia</code> alias is defined to <em>rktrunner</em> by virtue of being the basename of the path <code>/usr/local/julia/bin/julia</code> given in the config file.  As usual, if you want to see what <em>rktrunner</em> is actually passing through to the <code>rkt run</code> command, use <code>rkt-run -v</code>.</p>
 
-<pre><code>/usr/bin/rkt --insecure-options=image run --set-env-file /tmp/rktrunner32678/env --net=host \
---volume home,kind=host,source=/home/guestsi quay.io/biocontainers/bwa:0.7.15--0 \
---mount volume=home,target=/home/guestsi --user=511 --group=511 --exec bwa --
+<p>So far so good, but how to use this as a script interpreter?</p>
+
+<p>Ideally, we would like to be able to simply run a Julia script simply by invoking it from the command line.  Suppose the following file is called <code>hello-world.jl</code>, is executable, and is on the path:</p>
+
+<pre><code>#!/usr/bin/env julia
+println(&quot;Hello Julia world!&quot;)
 </code></pre>
 
-<h2 id="aliases">Aliases</h2>
+<p>What do we need in place to be able to invoke it as <code>hello-world.jl</code>?  We simply need an executable called <code>julia</code> installed somewhere on the path, which will be invoked with the name of the script file as an argument, and will in turn invoke <code>rkt-run julia &lt;scriptfile&gt;</code>.</p>
 
-<p>While an improvement over the full <code>rkt</code> command, that <code>rkt-run</code> invocation is still fairly cumbersome.  So <em>rktrunner</em> allows the sysadmin to define aliases, for example:</p>
+<p>In fact, <em>rktrunner</em> comes with just such an executable, called <code>rkt-run-helper</code>, which looks at its own name to determine which alias to use.  So it is sufficient to setup a symlink called <code>julia</code> somewhere on the path, like this (exact details depending on where <code>rkt-run-helper</code> has been installed):</p>
 
-<pre><code>[alias.bwa_]
-image = &quot;quay.io/biocontainers/bwa:0.7.15--0&quot;
-exec = [&quot;bwa&quot;]
+<pre><code>$ ls -l julia
+lrwxrwxrwx 1 root root 37 Apr 20 12:08 julia -&gt; /usr/libexec/rktrunner/rkt-run-helper
+
 </code></pre>
 
-<p>This means that the same <code>rkt</code> command may be run by typing:</p>
+<p>And once this is in place, we have just what we wanted, and can run Julia scripts using the containerized Julia interpreter.</p>
 
-<pre><code>$ rkt-run bwa
-</code></pre>
-
-<p>Note that aliases provide a simple way for the sysadmin to provide easily accessible default versions of standard programs like <em>bwa</em>.</p>
-
-<h2 id="wrapper-scripts">Wrapper scripts</h2>
-
-<p>However, a project user may not want to be tied to what the sysadmin has provided.  They could run their own version of <em>bwa</em>, say, via a wrapper script or shell function.  Here&rsquo;s a simple wrapper script, which would be saved in a file called <em>bwa</em> somewhere on the project path:</p>
-
-<pre><code>#!/bin/sh
-exec rkt-run -e bwa quay.io/biocontainers/bwa:0.7.15--0 &quot;$@&quot;
+<pre><code>$ ./hello-world.jl 
+Hello Julia world!
 </code></pre>
 
         </div>
         <footer class="article-footer">
-    <a data-url="http://www.coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/" data-id="b8ffdb044b876ea4e3335d44feb38b60" class="article-share-link">
+    <a data-url="http://www.coldharbourdigital.com/blog/2017/05/04/containerized-script-interpreters-including-julia/" data-id="4dcf46020a6fc70f741d2dde146f1562" class="article-share-link">
         <i class="fa fa-share"></i>
         Share
     </a>
@@ -449,13 +425,20 @@ exec rkt-run -e bwa quay.io/biocontainers/bwa:0.7.15--0 &quot;$@&quot;
     
 <nav id="article-nav">
     
+    <a href="http://www.coldharbourdigital.com/blog/2017/04/28/using-containers-behind-an-authenticating-web-proxy/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">Using containers behind an authenticating web proxy</div>
+    </a>
+    
 
     
-    <a href="http://www.coldharbourdigital.com/blog/2017/04/28/using-containers-behind-an-authenticating-web-proxy/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="http://www.coldharbourdigital.com/blog/2017/05/05/piping-output-between-containerized-applications/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">
           Newer
       </strong>
-      <div class="article-nav-title">Using containers behind an authenticating web proxy</div>
+      <div class="article-nav-title">Piping output between containerized applications</div>
     </a>
     
 </nav>

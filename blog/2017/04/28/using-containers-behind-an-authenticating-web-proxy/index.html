@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-gb">
 <head>
-    <title>Using BioContainers on a multi-user server &middot; Coldharbour Digital</title>
+    <title>Using containers behind an authenticating web proxy &middot; Coldharbour Digital</title>
     <meta name="generator" content="Hugo 0.25-DEV" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -10,7 +10,7 @@
       <meta name="description" content="">
     
     
-    <link rel="canonical" href="http://www.coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/"/>
+    <link rel="canonical" href="http://www.coldharbourdigital.com/blog/2017/04/28/using-containers-behind-an-authenticating-web-proxy/"/>
     <link rel="icon" href="http://www.coldharbourdigital.com/blog/favicon.ico">
     <link rel="apple-touch-icon" href="http://www.coldharbourdigital.com/blog/apple-touch-icon.png"/>
     <link rel="stylesheet" href="http://www.coldharbourdigital.com/blog/css/style.css">
@@ -20,15 +20,15 @@
     
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <meta property="og:title" content="Using BioContainers on a multi-user server" />
-<meta property="og:description" content="Bioinformatics users are a demanding bunch. They need to be able to run a large variety of applications on powerful servers. These servers may be administered by a small team of sysadmins, who quickly become a bottleneck in packaging and installing applications for the local users. Using application packaging such as RPM can make the task manageable, but there is still a per-application overhead on the sysadmin, and with a typical site using perhaps in excess of 300 applications, this becomes unmanageable." />
+    <meta property="og:title" content="Using containers behind an authenticating web proxy" />
+<meta property="og:description" content="Authenticating web proxies are an inconvenient fact of life, in that some applications simply will not run correctly behind one. However, many can be made to work simply by setting the http_proxy and possibly also the https_proxy environment variables. The rest of this post assumes the user is in fact behind such a proxy, and for the sake of simplicity, discusses only http_proxy. Such statements should be taken to also refer to https_proxy in environments where that is in fact required." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/" />
+<meta property="og:url" content="http://www.coldharbourdigital.com/blog/2017/04/28/using-containers-behind-an-authenticating-web-proxy/" />
 
 
 
-<meta property="article:published_time" content="2017-04-18T17:30:00&#43;12:00"/>
-<meta property="article:modified_time" content="2017-04-18T17:30:00&#43;12:00"/>
+<meta property="article:published_time" content="2017-04-28T17:30:00&#43;12:00"/>
+<meta property="article:modified_time" content="2017-04-28T17:30:00&#43;12:00"/>
 
 
 
@@ -42,12 +42,12 @@
 
     
     
-<meta itemprop="name" content="Using BioContainers on a multi-user server">
-<meta itemprop="description" content="Bioinformatics users are a demanding bunch. They need to be able to run a large variety of applications on powerful servers. These servers may be administered by a small team of sysadmins, who quickly become a bottleneck in packaging and installing applications for the local users. Using application packaging such as RPM can make the task manageable, but there is still a per-application overhead on the sysadmin, and with a typical site using perhaps in excess of 300 applications, this becomes unmanageable.">
+<meta itemprop="name" content="Using containers behind an authenticating web proxy">
+<meta itemprop="description" content="Authenticating web proxies are an inconvenient fact of life, in that some applications simply will not run correctly behind one. However, many can be made to work simply by setting the http_proxy and possibly also the https_proxy environment variables. The rest of this post assumes the user is in fact behind such a proxy, and for the sake of simplicity, discusses only http_proxy. Such statements should be taken to also refer to https_proxy in environments where that is in fact required.">
 
 
-<meta itemprop="dateModified" content="2017-04-18T17:30:00&#43;12:00" />
-<meta itemprop="wordCount" content="565">
+<meta itemprop="dateModified" content="2017-04-28T17:30:00&#43;12:00" />
+<meta itemprop="wordCount" content="339">
 
 
 
@@ -59,9 +59,9 @@
 
 
 
-<meta name="twitter:text:title" content="Using BioContainers on a multi-user server"/>
-<meta name="twitter:title" content="Using BioContainers on a multi-user server"/>
-<meta name="twitter:description" content="Bioinformatics users are a demanding bunch. They need to be able to run a large variety of applications on powerful servers. These servers may be administered by a small team of sysadmins, who quickly become a bottleneck in packaging and installing applications for the local users. Using application packaging such as RPM can make the task manageable, but there is still a per-application overhead on the sysadmin, and with a typical site using perhaps in excess of 300 applications, this becomes unmanageable."/>
+<meta name="twitter:text:title" content="Using containers behind an authenticating web proxy"/>
+<meta name="twitter:title" content="Using containers behind an authenticating web proxy"/>
+<meta name="twitter:description" content="Authenticating web proxies are an inconvenient fact of life, in that some applications simply will not run correctly behind one. However, many can be made to work simply by setting the http_proxy and possibly also the https_proxy environment variables. The rest of this post assumes the user is in fact behind such a proxy, and for the sake of simplicity, discusses only http_proxy. Such statements should be taken to also refer to https_proxy in environments where that is in fact required."/>
 
 
     
@@ -241,9 +241,9 @@
         
 
         <header class="article-header">
-    <a href="http://www.coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/">
+    <a href="http://www.coldharbourdigital.com/blog/2017/04/28/using-containers-behind-an-authenticating-web-proxy/">
     <h1 class="article-title" itemprop="name">
-        Using BioContainers on a multi-user server
+        Using containers behind an authenticating web proxy
     </h1>
     </a>
     <div class="article-meta">
@@ -251,12 +251,12 @@
         
         <div class="article-date">
             <i class="fa fa-calendar"></i>
-            <time datetime="2017-04-18 17:30:00 &#43;1200 NZST" itemprop="datePublished">2017-04-18</time>
+            <time datetime="2017-04-28 17:30:00 &#43;1200 NZST" itemprop="datePublished">2017-04-28</time>
             &middot;
-            565
+            339
             words
             &middot;
-            3
+            2
             minute read
         </div>
         
@@ -270,14 +270,6 @@
             
             <div class="article-category">
                 <i class="fa fa-tags"></i>
-                
-                
-                <a class="article-category-link" href="http://www.coldharbourdigital.com/blog/tags/biocontainers">biocontainers</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="http://www.coldharbourdigital.com/blog/tags/docker">docker</a>
-                &middot;
                 
                 
                 <a class="article-category-link" href="http://www.coldharbourdigital.com/blog/tags/rkt">rkt</a>
@@ -294,85 +286,41 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
+            <p>Authenticating web proxies are an inconvenient fact of life, in that some applications simply will not run correctly behind one.  However, many can be made to work simply by setting the <code>http_proxy</code> and possibly also the <code>https_proxy</code> environment variables.  The rest of this post assumes the user is in fact behind such a proxy, and for the sake of simplicity, discusses only <code>http_proxy</code>.  Such statements should be taken to also refer to <code>https_proxy</code> in environments where that is in fact required.  Recall the syntax using <code>http_proxy</code> with an authenticating web proxy is as follows:</p>
 
-<p>Bioinformatics users are a demanding bunch.  They need to be able to run a large variety of applications on powerful servers.  These servers may be administered by a small team of sysadmins, who quickly become a bottleneck in packaging and installing applications for the local users.  Using application packaging such as RPM can make the task manageable, but there is still a per-application overhead on the sysadmin, and with a typical site using perhaps in excess of 300 applications, this becomes unmanageable.</p>
+<pre><code>http_proxy=&quot;http://&lt;user&gt;:&lt;password&gt;@&lt;proxyhost&gt;:&lt;proxyport&gt;&quot;
+</code></pre>
 
-<p>Enter <a href="http://biocontainers.pro/">BioContainers</a>, an &ldquo;open source and community-driven framework which provides system-agnostic executable environments for bioinformatics software&rdquo;.  Over 2000 bioinformatics applications packaged as containers, and ready to run.</p>
+<p>Obviously, to fetch <em>rkt</em> images, it is necessary to have <code>http_proxy</code> defined in the user&rsquo;s environment on the host.</p>
 
-<p>There are two ways to run BioContainers: <a href="https://www.docker.com/">Docker</a> or <a href="https://coreos.com/rkt">rkt</a>.  But pretty quickly, it becomes apparent that as provided, these are only for privileged users.</p>
+<p>To run a web-aware containerized application in a <em>rkt</em> <a href="https://github.com/appc/spec/blob/master/spec/pods.md#app-container-pods-pods">pod</a>, it is necessary to also have <code>http_proxy</code> defined inside the pod.  A simple way to do this is to pass in this environment variable.  When using <code>rkt</code> as root, this may be achieved in various ways, as described in the <a href="https://coreos.com/rkt/docs/latest/subcommands/run.html#influencing-environment-variables">rkt documentation</a>.</p>
 
-<p>Docker first.  To run Docker, the user must be in the <em>docker</em> group on the system.  Membership of this group enables the user to run any docker command, with any parameters.  Including downloading any container image, mounting any host directory into the container, and running it as any user, <em>including root</em>.  Say goodbye to any idea of filesystem integrity on a multi-user server.</p>
+<p>When using <a href="https://github.com/tesujimath/rktrunner">rktrunner</a>, this may be achieved by the following configuration file snippet.</p>
 
-<p>Rkt is similar.  Images may be fetched by unprivileged users, but to actually run an image, it is necessary to be <em>root</em>.</p>
+<pre><code>[environment]
+http_proxy = &quot;{{.http_proxy}}&quot;
+</code></pre>
 
-<p>After raising <a href="https://github.com/BioContainers/containers/issues/147">an issue</a> about this on the BioContainers Github site, it emerged that the <a href="https://bitbucket.org/osallou/go-docker">Go-Docker</a> utility had been developed to address this issue for users of Docker.  Go-Docker appears to be fairly featureful, and manages job submission for job scheduling systems such as Sun Grid Engine, Torque, etc.  We considered using this, but decided the overhead of assimilating such a tool would be considerable.</p>
+<p>Note how the environment variable is referenced using <a href="https://golang.org/pkg/text/template/#pkg-overview">Go template syntax</a>, as described in the <a href="https://github.com/tesujimath/rktrunner/blob/master/doc/rktrunner.toml.md">rktrunner documentation</a>.</p>
 
-<p>So we decided to write <a href="https://github.com/tesujimath/rktrunner">rktrunner</a> a &ldquo;rkt run front-end for unprivileged users&rdquo;, that is, a simple wrapper for <code>rkt run</code>.</p>
+<p>If <code>http_proxy</code> is defined in the user&rsquo;s environment, <em>rktrunner</em> will be pass it into the pod, using <code>rkt --set-env-file</code>, using a file with carefully controlled permissions.  The point is, <code>http_proxy</code> probably contains the user&rsquo;s password, and should not be passed on the command line, as that would make the password visible to <code>ps</code> and the like.</p>
 
-<h1 id="rktrunner">Rktrunner</h1>
+<p>Configuring the <a href="https://coreos.com/rkt/docs/latest/subcommands/run.html#pod-networking">pod networking</a> and DNS may also be necessary, in particular if the web proxy hostname is defined only in a private DNS server, e.g.</p>
 
-<p><a href="https://github.com/tesujimath/rktrunner">Rktrunner</a> provides the <code>rkt-run</code> command, which is installed <em>setuid-root</em>, and wraps the underlying <code>rkt</code> program, carefully managing its command-line parameters, as defined by the local sysadmin in a site-wide config file.</p>
-
-<p>A simple configuration of <em>rktrunner</em> enables any user to run any container as themselves, with their home directory mounted in the container.  The config file for that looks like this:</p>
-
-<pre><code>rkt = &quot;/usr/bin/rkt&quot;
-
-[environment]
-HOME = &quot;/home/{{.Username}}&quot;
-
-[options.common]
-general = [&quot;--insecure-options=image&quot;]
-run = [&quot;--net=host&quot;]
-image = [
-    &quot;--user={{.Uid}}&quot;,
-    &quot;--group={{.Gid}}&quot;,
+<pre><code>[options.common]
+run = [
+    &quot;--net=host&quot;,
+    &quot;--dns=192.168.0.1&quot;,      # substitute your DNS server IP address, if required
 ]
-
-[volume.home]
-volume = &quot;kind=host,source={{.HomeDir}}&quot;
-mount = &quot;target=/home/{{.Username}}&quot;
 </code></pre>
 
-<p>With this config file, the following <code>rkt-run</code> command by an unprivleged user:</p>
+<p>Without the DNS configuration in the pod, the containerized application may not be able to resolve the web proxy hostname.</p>
 
-<pre><code>$ rkt-run -e bwa quay.io/biocontainers/bwa:0.7.15--0
-</code></pre>
-
-<p>results in the following invocation of <code>rkt</code>:</p>
-
-<pre><code>/usr/bin/rkt --insecure-options=image run --set-env-file /tmp/rktrunner32678/env --net=host \
---volume home,kind=host,source=/home/guestsi quay.io/biocontainers/bwa:0.7.15--0 \
---mount volume=home,target=/home/guestsi --user=511 --group=511 --exec bwa --
-</code></pre>
-
-<h2 id="aliases">Aliases</h2>
-
-<p>While an improvement over the full <code>rkt</code> command, that <code>rkt-run</code> invocation is still fairly cumbersome.  So <em>rktrunner</em> allows the sysadmin to define aliases, for example:</p>
-
-<pre><code>[alias.bwa_]
-image = &quot;quay.io/biocontainers/bwa:0.7.15--0&quot;
-exec = [&quot;bwa&quot;]
-</code></pre>
-
-<p>This means that the same <code>rkt</code> command may be run by typing:</p>
-
-<pre><code>$ rkt-run bwa
-</code></pre>
-
-<p>Note that aliases provide a simple way for the sysadmin to provide easily accessible default versions of standard programs like <em>bwa</em>.</p>
-
-<h2 id="wrapper-scripts">Wrapper scripts</h2>
-
-<p>However, a project user may not want to be tied to what the sysadmin has provided.  They could run their own version of <em>bwa</em>, say, via a wrapper script or shell function.  Here&rsquo;s a simple wrapper script, which would be saved in a file called <em>bwa</em> somewhere on the project path:</p>
-
-<pre><code>#!/bin/sh
-exec rkt-run -e bwa quay.io/biocontainers/bwa:0.7.15--0 &quot;$@&quot;
-</code></pre>
+<p>With simple configuration directives such as these, web-aware containerized applications can be configured to work with <a href="https://github.com/tesujimath/rktrunner">rktrunner</a> even behind corporate firewalls.</p>
 
         </div>
         <footer class="article-footer">
-    <a data-url="http://www.coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/" data-id="b8ffdb044b876ea4e3335d44feb38b60" class="article-share-link">
+    <a data-url="http://www.coldharbourdigital.com/blog/2017/04/28/using-containers-behind-an-authenticating-web-proxy/" data-id="fd07c01bd315d5127827b426b26a59be" class="article-share-link">
         <i class="fa fa-share"></i>
         Share
     </a>
@@ -449,13 +397,20 @@ exec rkt-run -e bwa quay.io/biocontainers/bwa:0.7.15--0 &quot;$@&quot;
     
 <nav id="article-nav">
     
+    <a href="http://www.coldharbourdigital.com/blog/2017/04/18/using-biocontainers-on-a-multi-user-server/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">Using BioContainers on a multi-user server</div>
+    </a>
+    
 
     
-    <a href="http://www.coldharbourdigital.com/blog/2017/04/28/using-containers-behind-an-authenticating-web-proxy/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="http://www.coldharbourdigital.com/blog/2017/05/04/containerized-script-interpreters-including-julia/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">
           Newer
       </strong>
-      <div class="article-nav-title">Using containers behind an authenticating web proxy</div>
+      <div class="article-nav-title">Containerized script interpreters, including Julia</div>
     </a>
     
 </nav>

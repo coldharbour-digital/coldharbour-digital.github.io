@@ -7,10 +7,50 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <copyright>Coldharbour Digital Ltd.  Design by [PPOffice](http://github.com/ppoffice).  Powered by [Hugo](//gohugo.io).</copyright>
-    <lastBuildDate>Tue, 18 Apr 2017 17:30:00 +1200</lastBuildDate>
+    <lastBuildDate>Sat, 24 Jun 2017 11:15:00 +1200</lastBuildDate>
     
 	<atom:link href="http://www.coldharbourdigital.com/blog/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Reusing rkt pods in a BioInformatics pipeline</title>
+      <link>http://www.coldharbourdigital.com/blog/2017/06/24/reusing-rkt-pods-in-a-bioinformatics-pipeline/</link>
+      <pubDate>Sat, 24 Jun 2017 11:15:00 +1200</pubDate>
+      
+      <guid>http://www.coldharbourdigital.com/blog/2017/06/24/reusing-rkt-pods-in-a-bioinformatics-pipeline/</guid>
+      <description>A BioInformatics pipeline may require invocation of some low-level programs like samtools hundreds or thousands of times. If these processes are run as BioContainers, using rkt for example, this means creation of very many rkt pods, adding up to a significant overhead both in space and time. Can we do better?
+In fact we can. For the purpose of running a containerized application in this context, all that matters is which container image it is, and which user it runs as.</description>
+    </item>
+    
+    <item>
+      <title>Piping output between containerized applications</title>
+      <link>http://www.coldharbourdigital.com/blog/2017/05/05/piping-output-between-containerized-applications/</link>
+      <pubDate>Fri, 05 May 2017 17:30:00 +1200</pubDate>
+      
+      <guid>http://www.coldharbourdigital.com/blog/2017/05/05/piping-output-between-containerized-applications/</guid>
+      <description>Commonly, BioInformatics pipelines are built by piping output between applications. If each application is itself a BioContainer, and we are running them using rkt, this means we need to be able to pipe output between rkt pods. How can we do this?
+Rkt supports running multiple applications within a pod, so has no direct concept of pod standard input and standard output. By default, application output goes to the systemd journal within the pod, which appears on the standard output of the pod itself.</description>
+    </item>
+    
+    <item>
+      <title>Containerized script interpreters, including Julia</title>
+      <link>http://www.coldharbourdigital.com/blog/2017/05/04/containerized-script-interpreters-including-julia/</link>
+      <pubDate>Thu, 04 May 2017 17:30:00 +1200</pubDate>
+      
+      <guid>http://www.coldharbourdigital.com/blog/2017/05/04/containerized-script-interpreters-including-julia/</guid>
+      <description>The ability to easily run containerized applications using rkt is quite intoxicating, and quickly leads on to an exploration of what applications are readily available. Docker Hub and Quay are worth exploring. Among those applications on Docker Hub are Julia and Ruby.
+Noting the slightly non-standard security requirements needed by the Julia interpreter, we can configure rktrunner to run Julia using this configuration file snippet:
+[options.common] image = [ &amp;quot;--seccomp&amp;quot;, &amp;quot;mode=retain,@docker/default-whitelist,mbind&amp;quot;, ] [alias.</description>
+    </item>
+    
+    <item>
+      <title>Using containers behind an authenticating web proxy</title>
+      <link>http://www.coldharbourdigital.com/blog/2017/04/28/using-containers-behind-an-authenticating-web-proxy/</link>
+      <pubDate>Fri, 28 Apr 2017 17:30:00 +1200</pubDate>
+      
+      <guid>http://www.coldharbourdigital.com/blog/2017/04/28/using-containers-behind-an-authenticating-web-proxy/</guid>
+      <description>Authenticating web proxies are an inconvenient fact of life, in that some applications simply will not run correctly behind one. However, many can be made to work simply by setting the http_proxy and possibly also the https_proxy environment variables. The rest of this post assumes the user is in fact behind such a proxy, and for the sake of simplicity, discusses only http_proxy. Such statements should be taken to also refer to https_proxy in environments where that is in fact required.</description>
+    </item>
     
     <item>
       <title>Using BioContainers on a multi-user server</title>
