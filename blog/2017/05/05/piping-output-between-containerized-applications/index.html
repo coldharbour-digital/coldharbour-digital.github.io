@@ -293,19 +293,19 @@ Rkt supports running multiple applications within a pod, so has no direct concep
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            <p>Commonly, BioInformatics pipelines are built by piping output between applications.  If each application is itself a BioContainer, and we are running them using <em>rkt</em>, this means we need to be able to pipe output between <em>rkt</em> pods.  How can we do this?</p>
+            <p>Commonly, BioInformatics pipelines are built by piping output between applications.  If each application is itself a BioContainer, and we are running them using <em>rkt</em>, this means we need to be able to pipe output between rkt pods.  How can we do this?</p>
 
 <p><a href="https://coreos.com/rkt">Rkt</a> supports running multiple applications within a <a href="https://github.com/appc/spec/blob/master/spec/pods.md#app-container-pods-pods">pod</a>, so has no direct concept of pod standard input and standard output.  By default, application output goes to the <em>systemd</em> journal within the pod, which appears on the standard output of the pod itself.  It may be tempting to post-process this output to strip the <em>journald</em> prefixes and pipe it, but this is a fragile solution at best, and is not performant when it comes to BioInformatics applications which may be generating hundreds of gigabytes of output.  <em>Journald</em> very quickly becomes a bottleneck.</p>
 
-<p>Recent versions of <em>rkt</em> support an experimental feature to access application standard input/output using <a href="https://coreos.com/rkt/docs/latest/subcommands/attach.html">rkt attach</a>.  If a pod has been started using the experimental stream modes, a separate process may use <code>rkt attach</code> to connect to the standard input and/or output of an application running within the pod.</p>
+<p>Recent versions of rkt support an experimental feature to access application standard input/output using <a href="https://coreos.com/rkt/docs/latest/subcommands/attach.html">rkt attach</a>.  If a pod has been started using the experimental stream modes, a separate process may use <code>rkt attach</code> to connect to the standard input and/or output of an application running within the pod.</p>
 
-<p>An early version of <a href="https://github.com/tesujimath/rktrunner">rktrunner</a> made use of <code>rkt attach</code> to access application standard input and output within a running pod.  However, management of the extra process required with this approach threatened to turn the simple <em>rktrunner</em> wrapper into an overly complex piece of software, and the experimental nature of the <code>rkt attach</code> feature soon manifested itself in <a href="https://github.com/rkt/rkt/issues/3639#issuecomment-298823800">various glitches</a>.  A simpler and more robust solution was required.</p>
+<p>An early version of <a href="https://github.com/tesujimath/rktrunner">rktrunner</a> made use of <code>rkt attach</code> to access application standard input and output within a running pod.  However, management of the extra process required with this approach threatened to turn the simple rktrunner wrapper into an overly complex piece of software, and the experimental nature of the <code>rkt attach</code> feature soon manifested itself in <a href="https://github.com/rkt/rkt/issues/3639#issuecomment-298823800">various glitches</a>.  A simpler and more robust solution was required.</p>
 
-<p><em>Rkt</em> has a <a href="https://coreos.com/rkt/docs/latest/devel/architecture.html">modular architecture</a>.  It is possible to run an alternate so-called <a href="https://coreos.com/rkt/docs/latest/running-fly-stage1.html">fly stage1</a>, which supports only single-application <a href="https://coreos.com/rkt/docs/latest/app-container.html#aci">ACIs</a>, and with a lighter isolation than fully namespaced containers, simply using a <em>chroot</em>.  This simplification is in fact a perfect match for our use-case of wanting to run single-application BioContainers in a BioInformatics pipeline, especially since application standard input/output trivially becomes pod standard input/output.</p>
+<p>Rkt has a <a href="https://coreos.com/rkt/docs/latest/devel/architecture.html">modular architecture</a>.  It is possible to run an alternate so-called <a href="https://coreos.com/rkt/docs/latest/running-fly-stage1.html">fly stage1</a>, which supports only single-application <a href="https://coreos.com/rkt/docs/latest/app-container.html#aci">ACIs</a>, and with a lighter isolation than fully namespaced containers, simply using a <em>chroot</em>.  This simplification is in fact a perfect match for our use-case of wanting to run single-application BioContainers in a BioInformatics pipeline, especially since application standard input/output trivially becomes pod standard input/output.</p>
 
-<p>In order to switch <em>rktrunner</em> to use the <em>fly stage1</em>, the following configuration file snippet is required (being careful to match the version of <em>stage1-fly</em> with the <em>rkt</em> version installed on the system.)</p>
+<p>In order to switch rktrunner to use the <em>fly stage1</em>, the following configuration file snippet is required (being careful to match the version of <em>stage1-fly</em> with the rkt version installed on the system.)</p>
 
-<pre><code>[options.common]
+<pre><code class="language-toml">[options.common]
 image = [
     &quot;--stage1-name=coreos.com/rkt/stage1-fly:1.27.0&quot;,
 ]
@@ -313,7 +313,7 @@ image = [
 
 <p>Alternatively, it is possible to use the <em>fly stage1</em> installed locally, perhaps as part of the official <em>rkt RPM</em>, as follows.</p>
 
-<pre><code>[options.common]
+<pre><code class="language-toml">[options.common]
 image = [
     &quot;--stage1-path=/usr/lib/rkt/stage1-images/stage1-fly.aci&quot;,
 ]

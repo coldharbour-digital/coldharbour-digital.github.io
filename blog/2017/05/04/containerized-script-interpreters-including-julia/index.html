@@ -296,7 +296,7 @@ Noting the slightly non-standard security requirements needed by the Julia inter
 
 <p>Noting the <a href="https://github.com/rkt/rkt/issues/3651">slightly non-standard security requirements</a> needed by the Julia interpreter, we can configure <a href="https://github.com/tesujimath/rktrunner">rktrunner</a> to run Julia using this configuration file snippet:</p>
 
-<pre><code>[options.common]
+<pre><code class="language-toml">[options.common]
 image = [
     &quot;--seccomp&quot;, &quot;mode=retain,@docker/default-whitelist,mbind&quot;,
 ]
@@ -306,9 +306,9 @@ image = &quot;docker://julia&quot;
 exec = [&quot;/usr/local/julia/bin/julia&quot;]
 </code></pre>
 
-<p>Note that this snippet makes use of a <em>rktrunner</em> alias, so that we can invoke containerized Julia very easily.</p>
+<p>Note that this snippet makes use of a <em>rktrunner alias</em>, so that we can invoke containerized Julia very easily.</p>
 
-<pre><code>$ rkt-run -i julia
+<pre><code class="language-shell">$ rkt-run -i julia
                _
    _       _ _(_)_     |  A fresh approach to technical computing
   (_)     | (_) (_)    |  Documentation: http://docs.julialang.org
@@ -321,28 +321,28 @@ exec = [&quot;/usr/local/julia/bin/julia&quot;]
 julia&gt;
 </code></pre>
 
-<p>The <code>julia</code> alias is defined to <em>rktrunner</em> by virtue of being the basename of the path <code>/usr/local/julia/bin/julia</code> given in the config file.  As usual, if you want to see what <em>rktrunner</em> is actually passing through to the <code>rkt run</code> command, use <code>rkt-run -v</code>.</p>
+<p>The <em>julia</em> alias is defined to rktrunner by virtue of being the basename of the path <code>/usr/local/julia/bin/julia</code> given in the config file.  As usual, if you want to see what rktrunner is actually passing through to the <code>rkt run</code> command, use <code>rkt-run -v</code>.</p>
 
 <p>So far so good, but how to use this as a script interpreter?</p>
 
 <p>Ideally, we would like to be able to simply run a Julia script simply by invoking it from the command line.  Suppose the following file is called <code>hello-world.jl</code>, is executable, and is on the path:</p>
 
-<pre><code>#!/usr/bin/env julia
+<pre><code class="language-bash">#!/usr/bin/env julia
 println(&quot;Hello Julia world!&quot;)
 </code></pre>
 
-<p>What do we need in place to be able to invoke it as <code>hello-world.jl</code>?  We simply need an executable called <code>julia</code> installed somewhere on the path, which will be invoked with the name of the script file as an argument, and will in turn invoke <code>rkt-run julia &lt;scriptfile&gt;</code>.</p>
+<p>What do we need in place to be able to invoke it as <code>hello-world.jl</code>?  We simply need an executable called <em>julia</em> installed somewhere on the path, which will be invoked with the name of the script file as an argument, and will in turn invoke <code>rkt-run julia &lt;scriptfile&gt;</code>.</p>
 
-<p>In fact, <em>rktrunner</em> comes with just such an executable, called <code>rkt-run-helper</code>, which looks at its own name to determine which alias to use.  So it is sufficient to setup a symlink called <code>julia</code> somewhere on the path, like this (exact details depending on where <code>rkt-run-helper</code> has been installed):</p>
+<p>In fact, rktrunner comes with just such an executable, called <em>rkt-run-helper</em>, which looks at its own name to determine which alias to use.  So it is sufficient to setup a symlink called <em>julia</em> somewhere on the path, like this (exact details depending on where <em>rkt-run-helper</em> has been installed):</p>
 
-<pre><code>$ ls -l julia
+<pre><code class="language-shell">$ ls -l julia
 lrwxrwxrwx 1 root root 37 Apr 20 12:08 julia -&gt; /usr/libexec/rktrunner/rkt-run-helper
 
 </code></pre>
 
 <p>And once this is in place, we have just what we wanted, and can run Julia scripts using the containerized Julia interpreter.</p>
 
-<pre><code>$ ./hello-world.jl 
+<pre><code class="language-shell">$ ./hello-world.jl 
 Hello Julia world!
 </code></pre>
 

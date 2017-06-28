@@ -286,28 +286,28 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            <p>Authenticating web proxies are an inconvenient fact of life, in that some applications simply will not run correctly behind one.  However, many can be made to work simply by setting the <code>http_proxy</code> and possibly also the <code>https_proxy</code> environment variables.  The rest of this post assumes the user is in fact behind such a proxy, and for the sake of simplicity, discusses only <code>http_proxy</code>.  Such statements should be taken to also refer to <code>https_proxy</code> in environments where that is in fact required.  Recall the syntax using <code>http_proxy</code> with an authenticating web proxy is as follows:</p>
+            <p>Authenticating web proxies are an inconvenient fact of life, in that some applications simply will not run correctly behind one.  However, many can be made to work simply by setting the <em>http_proxy</em> and possibly also the <em>https_proxy</em> environment variables.  The rest of this post assumes the user is in fact behind such a proxy, and for the sake of simplicity, discusses only <em>http_proxy</em>.  Such statements should be taken to also refer to <em>https_proxy</em> in environments where that is in fact required.  Recall the syntax using <em>http_proxy</em> with an authenticating web proxy is as follows:</p>
 
-<pre><code>http_proxy=&quot;http://&lt;user&gt;:&lt;password&gt;@&lt;proxyhost&gt;:&lt;proxyport&gt;&quot;
+<pre><code class="language-ini">http_proxy=&quot;http://&lt;user&gt;:&lt;password&gt;@&lt;proxyhost&gt;:&lt;proxyport&gt;&quot;
 </code></pre>
 
-<p>Obviously, to fetch <em>rkt</em> images, it is necessary to have <code>http_proxy</code> defined in the user&rsquo;s environment on the host.</p>
+<p>Obviously, to fetch rkt images, it is necessary to have <em>http_proxy</em> defined in the user&rsquo;s environment on the host.</p>
 
-<p>To run a web-aware containerized application in a <em>rkt</em> <a href="https://github.com/appc/spec/blob/master/spec/pods.md#app-container-pods-pods">pod</a>, it is necessary to also have <code>http_proxy</code> defined inside the pod.  A simple way to do this is to pass in this environment variable.  When using <code>rkt</code> as root, this may be achieved in various ways, as described in the <a href="https://coreos.com/rkt/docs/latest/subcommands/run.html#influencing-environment-variables">rkt documentation</a>.</p>
+<p>To run a web-aware containerized application in a rkt <a href="https://github.com/appc/spec/blob/master/spec/pods.md#app-container-pods-pods">pod</a>, it is necessary to also have <em>http_proxy</em> defined inside the pod.  A simple way to do this is to pass in this environment variable.  When using <code>rkt</code> as root, this may be achieved in various ways, as described in the <a href="https://coreos.com/rkt/docs/latest/subcommands/run.html#influencing-environment-variables">rkt documentation</a>.</p>
 
 <p>When using <a href="https://github.com/tesujimath/rktrunner">rktrunner</a>, this may be achieved by the following configuration file snippet.</p>
 
-<pre><code>[environment]
+<pre><code class="language-toml">[environment]
 http_proxy = &quot;{{.http_proxy}}&quot;
 </code></pre>
 
 <p>Note how the environment variable is referenced using <a href="https://golang.org/pkg/text/template/#pkg-overview">Go template syntax</a>, as described in the <a href="https://github.com/tesujimath/rktrunner/blob/master/doc/rktrunner.toml.md">rktrunner documentation</a>.</p>
 
-<p>If <code>http_proxy</code> is defined in the user&rsquo;s environment, <em>rktrunner</em> will be pass it into the pod, using <code>rkt --set-env-file</code>, using a file with carefully controlled permissions.  The point is, <code>http_proxy</code> probably contains the user&rsquo;s password, and should not be passed on the command line, as that would make the password visible to <code>ps</code> and the like.</p>
+<p>If <em>http_proxy</em> is defined in the user&rsquo;s environment, rktrunner will be pass it into the pod, using <code>rkt --set-env-file</code>, using a file with carefully controlled permissions.  The point is, <em>http_proxy</em> probably contains the user&rsquo;s password, and should not be passed on the command line, as that would make the password visible to <code>ps</code> and the like.</p>
 
 <p>Configuring the <a href="https://coreos.com/rkt/docs/latest/subcommands/run.html#pod-networking">pod networking</a> and DNS may also be necessary, in particular if the web proxy hostname is defined only in a private DNS server, e.g.</p>
 
-<pre><code>[options.common]
+<pre><code class="language-toml">[options.common]
 run = [
     &quot;--net=host&quot;,
     &quot;--dns=192.168.0.1&quot;,      # substitute your DNS server IP address, if required
