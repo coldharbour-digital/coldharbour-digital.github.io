@@ -2,7 +2,7 @@
 <html lang="en-gb">
 <head>
     <title>Using BioContainers on a multi-user server &middot; Coldharbour Digital</title>
-    <meta name="generator" content="Hugo 0.25-DEV" />
+    <meta name="generator" content="Hugo 0.24.1" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Simon Guest">
@@ -316,7 +316,7 @@
 
 <p>A simple configuration of <em>rktrunner</em> enables any user to run any container as themselves, with their home directory mounted in the container.  The config file for that looks like this:</p>
 
-<pre><code>rkt = &quot;/usr/bin/rkt&quot;
+<pre><code class="language-toml">rkt = &quot;/usr/bin/rkt&quot;
 
 [environment]
 HOME = &quot;/home/{{.Username}}&quot;
@@ -336,12 +336,12 @@ mount = &quot;target=/home/{{.Username}}&quot;
 
 <p>With this config file, the following <code>rkt-run</code> command by an unprivleged user:</p>
 
-<pre><code>$ rkt-run -e bwa quay.io/biocontainers/bwa:0.7.15--0
+<pre><code class="language-shell">$ rkt-run -e bwa quay.io/biocontainers/bwa:0.7.15--0
 </code></pre>
 
 <p>results in the following invocation of <code>rkt</code>:</p>
 
-<pre><code>/usr/bin/rkt --insecure-options=image run --set-env-file /tmp/rktrunner32678/env --net=host \
+<pre><code class="language-shell">/usr/bin/rkt --insecure-options=image run --set-env-file /tmp/rktrunner32678/env --net=host \
 --volume home,kind=host,source=/home/guestsi quay.io/biocontainers/bwa:0.7.15--0 \
 --mount volume=home,target=/home/guestsi --user=511 --group=511 --exec bwa --
 </code></pre>
@@ -350,14 +350,14 @@ mount = &quot;target=/home/{{.Username}}&quot;
 
 <p>While an improvement over the full <code>rkt</code> command, that <code>rkt-run</code> invocation is still fairly cumbersome.  So <em>rktrunner</em> allows the sysadmin to define aliases, for example:</p>
 
-<pre><code>[alias.bwa_]
+<pre><code class="language-toml">[alias.bwa_]
 image = &quot;quay.io/biocontainers/bwa:0.7.15--0&quot;
 exec = [&quot;bwa&quot;]
 </code></pre>
 
 <p>This means that the same <code>rkt</code> command may be run by typing:</p>
 
-<pre><code>$ rkt-run bwa
+<pre><code class="language-shell">$ rkt-run bwa
 </code></pre>
 
 <p>Note that aliases provide a simple way for the sysadmin to provide easily accessible default versions of standard programs like <em>bwa</em>.</p>
@@ -366,7 +366,7 @@ exec = [&quot;bwa&quot;]
 
 <p>However, a project user may not want to be tied to what the sysadmin has provided.  They could run their own version of <em>bwa</em>, say, via a wrapper script or shell function.  Here&rsquo;s a simple wrapper script, which would be saved in a file called <em>bwa</em> somewhere on the project path:</p>
 
-<pre><code>#!/bin/sh
+<pre><code class="language-bash">#!/bin/sh
 exec rkt-run -e bwa quay.io/biocontainers/bwa:0.7.15--0 &quot;$@&quot;
 </code></pre>
 
@@ -647,6 +647,16 @@ exec rkt-run -e bwa quay.io/biocontainers/bwa:0.7.15--0 &quot;$@&quot;
   </div>
 </footer>
 
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-101778563-1', 'auto');
+ga('send', 'pageview');
+</script>
 
 <script src="http://www.coldharbourdigital.com/blog/fancybox/jquery.fancybox.pack.js"></script>
 <script src="http://www.coldharbourdigital.com/blog/js/script.js"></script>
