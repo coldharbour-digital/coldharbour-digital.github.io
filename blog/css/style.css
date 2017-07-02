@@ -381,7 +381,8 @@ code {
   font-size: 16px;
   display: inline-block;
   vertical-align: top;
-  font-weight: 600;
+  font-weight: bold;
+  font-family: Comfortaa, "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
 }
 #header-title {
   text-align: center;

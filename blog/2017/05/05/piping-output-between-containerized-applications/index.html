@@ -20,6 +20,7 @@
     
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Comfortaa:700' rel='stylesheet' type='text/css'>
     <meta property="og:title" content="Piping output between containerized applications" />
 <meta property="og:description" content="Commonly, BioInformatics pipelines are built by piping output between applications. If each application is itself a BioContainer, and we are running them using rkt, this means we need to be able to pipe output between rkt pods. How can we do this?
 Rkt supports running multiple applications within a pod, so has no direct concept of pod standard input and standard output. By default, application output goes to the systemd journal within the pod, which appears on the standard output of the pod itself." />
