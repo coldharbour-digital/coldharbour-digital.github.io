@@ -50,7 +50,7 @@ In fact we can. For the purpose of running a containerized application in this c
 
 
 <meta itemprop="dateModified" content="2017-06-24T11:15:00&#43;12:00" />
-<meta itemprop="wordCount" content="389">
+<meta itemprop="wordCount" content="605">
 
 
 
@@ -257,10 +257,10 @@ In fact we can. For the purpose of running a containerized application in this c
             <i class="fa fa-calendar"></i>
             <time datetime="2017-06-24 11:15:00 &#43;1200 NZST" itemprop="datePublished">2017-06-24</time>
             &middot;
-            389
+            605
             words
             &middot;
-            2
+            3
             minute read
         </div>
         
@@ -294,7 +294,9 @@ In fact we can. For the purpose of running a containerized application in this c
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            <p>A BioInformatics pipeline may require invocation of some low-level programs like <a href="https://github.com/samtools/samtools">samtools</a> hundreds or thousands of times.  If these processes are run as <a href="http://biocontainers.pro/">BioContainers</a>, using <a href="https://coreos.com/rkt">rkt</a> for example, this means creation of very many rkt pods, adding up to a significant overhead both in space and time.  Can we do better?</p>
+            
+
+<p>A BioInformatics pipeline may require invocation of some low-level programs like <a href="https://github.com/samtools/samtools">samtools</a> hundreds or thousands of times.  If these processes are run as <a href="http://biocontainers.pro/">BioContainers</a>, using <a href="https://coreos.com/rkt">rkt</a> for example, this means creation of very many rkt pods, adding up to a significant overhead both in space and time.  Can we do better?</p>
 
 <p>In fact we can.  For the purpose of running a containerized application in this context, all that matters is which container image it is, and which user it runs as.  Since rkt already supports the idea of entering a running pod using <a href="https://coreos.com/rkt/docs/latest/subcommands/enter.html">rkt enter</a>, we can use this to share pod instances between the multiple invocations of programs such as <em>samtools</em>.</p>
 
@@ -312,6 +314,20 @@ In fact we can. For the purpose of running a containerized application in this c
 <p>Reaping idle worker pods is done by a separate garbage collection cycle.  The <a href="https://github.com/tesujimath/rktrunner">rktrunner-gc</a> program, best run at regular intervals from a <em>cron</em> job, attempts to acquire an exclusive lock on the directory locked by <code>rkt enter</code> instances.  If it succeeds, it knows the pod is no longer in use, and can safely stop the pod and remove the lock directory.</p>
 
 <p>In practice, this <em>worker pods</em> feature of rktrunner reduced the overhead of running multiple and many utility programs like <em>samtools</em> down to approximately the same level as starting a process, as would be done in a non-containerized environment.</p>
+
+<h2 id="addendum">Addendum</h2>
+
+<p><em>Added 2017-07-07</em></p>
+
+<p>For one specific scenario, this isn&rsquo;t quite enough.  If there is no existing worker pod, and many instances of the containerized application are started concurrently, each one will notice there is no suitable worker pod available, and create its own, in parallel, leading to no pod sharing at all.  The reason for this is that by the time each worker pod has been created, the other instances have already failed to find a suitable worker.  This is exactly the situation that worker pods were designed to avoid.  What to do?</p>
+
+<p>In fact, the solution is very simple.  Before initiating a pipeline with many concurrent parts, it is necessary to prime the pump.  That means, create a worker pod, which all of those concurrent instances will use.  There are two ways to do this.</p>
+
+<p>It is sufficient simply to run the application in a null mode, e.g. with <code>--help</code>, a side effect of which is to create the worker.</p>
+
+<p>For applications which don&rsquo;t have such a mode, since version 0.19.0 rktrunner has a <code>--prepare</code> option, which simply creates the worker pod and exits, without calling the application at all.</p>
+
+<p>With either of these approaches, worker pods result in a single shared pod for all of the concurrent application instances, irrespective of the start-up timing.</p>
 
         </div>
         <footer class="article-footer">
