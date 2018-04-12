@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-gb">
 <head>
-    <title>Containerized script interpreters, including Julia &middot; Coldharbour Digital</title>
+    <title>Concurrent use of Multiple Conda Environments &middot; Coldharbour Digital</title>
     <meta name="generator" content="Hugo 0.24.1" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -10,7 +10,7 @@
       <meta name="description" content="">
     
     
-    <link rel="canonical" href="http://www.coldharbourdigital.com/blog/2017/05/04/containerized-script-interpreters-including-julia/"/>
+    <link rel="canonical" href="http://www.coldharbourdigital.com/blog/2018/04/12/concurrent-use-of-multiple-conda-environments/"/>
     <link rel="icon" href="http://www.coldharbourdigital.com/blog/favicon.ico">
     <link rel="apple-touch-icon" href="http://www.coldharbourdigital.com/blog/apple-touch-icon.png"/>
     <link rel="stylesheet" href="http://www.coldharbourdigital.com/blog/css/style.css">
@@ -21,17 +21,16 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Comfortaa:700' rel='stylesheet' type='text/css'>
-    <meta property="og:title" content="Containerized script interpreters, including Julia" />
-<meta property="og:description" content="The ability to easily run containerized applications using rkt is quite intoxicating, and quickly leads on to an exploration of what applications are readily available. Docker Hub and Quay are worth exploring. Among those applications on Docker Hub are Julia and Ruby.
-Noting the slightly non-standard security requirements needed by the Julia interpreter, we can configure rktrunner to run Julia using this configuration file snippet:
-[options.common] image = [ &quot;--seccomp&quot;, &quot;mode=retain,@docker/default-whitelist,mbind&quot;, ] [alias." />
+    <meta property="og:title" content="Concurrent use of Multiple Conda Environments" />
+<meta property="og:description" content="Conda is a platform-neutral packaging system. The BioConda channel is of particular interest for bioinformatics users, as it provides access to an enormous library of ready-to-use bioinformatics applications, which can be otherwise notoriously difficult to install.
+One of the problems solved by Conda, and BioConda, is the dependency hell which results from trying to install several applications, which have requirements for incompatible versions of their dependencies, for example different versions of samtools." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.coldharbourdigital.com/blog/2017/05/04/containerized-script-interpreters-including-julia/" />
+<meta property="og:url" content="http://www.coldharbourdigital.com/blog/2018/04/12/concurrent-use-of-multiple-conda-environments/" />
 
 
 
-<meta property="article:published_time" content="2017-05-04T17:30:00&#43;12:00"/>
-<meta property="article:modified_time" content="2017-05-04T17:30:00&#43;12:00"/>
+<meta property="article:published_time" content="2018-04-12T14:23:00&#43;12:00"/>
+<meta property="article:modified_time" content="2018-04-12T14:23:00&#43;12:00"/>
 
 
 
@@ -45,14 +44,13 @@ Noting the slightly non-standard security requirements needed by the Julia inter
 
     
     
-<meta itemprop="name" content="Containerized script interpreters, including Julia">
-<meta itemprop="description" content="The ability to easily run containerized applications using rkt is quite intoxicating, and quickly leads on to an exploration of what applications are readily available. Docker Hub and Quay are worth exploring. Among those applications on Docker Hub are Julia and Ruby.
-Noting the slightly non-standard security requirements needed by the Julia interpreter, we can configure rktrunner to run Julia using this configuration file snippet:
-[options.common] image = [ &quot;--seccomp&quot;, &quot;mode=retain,@docker/default-whitelist,mbind&quot;, ] [alias.">
+<meta itemprop="name" content="Concurrent use of Multiple Conda Environments">
+<meta itemprop="description" content="Conda is a platform-neutral packaging system. The BioConda channel is of particular interest for bioinformatics users, as it provides access to an enormous library of ready-to-use bioinformatics applications, which can be otherwise notoriously difficult to install.
+One of the problems solved by Conda, and BioConda, is the dependency hell which results from trying to install several applications, which have requirements for incompatible versions of their dependencies, for example different versions of samtools.">
 
 
-<meta itemprop="dateModified" content="2017-05-04T17:30:00&#43;12:00" />
-<meta itemprop="wordCount" content="399">
+<meta itemprop="dateModified" content="2018-04-12T14:23:00&#43;12:00" />
+<meta itemprop="wordCount" content="411">
 
 
 
@@ -64,11 +62,10 @@ Noting the slightly non-standard security requirements needed by the Julia inter
 
 
 
-<meta name="twitter:text:title" content="Containerized script interpreters, including Julia"/>
-<meta name="twitter:title" content="Containerized script interpreters, including Julia"/>
-<meta name="twitter:description" content="The ability to easily run containerized applications using rkt is quite intoxicating, and quickly leads on to an exploration of what applications are readily available. Docker Hub and Quay are worth exploring. Among those applications on Docker Hub are Julia and Ruby.
-Noting the slightly non-standard security requirements needed by the Julia interpreter, we can configure rktrunner to run Julia using this configuration file snippet:
-[options.common] image = [ &quot;--seccomp&quot;, &quot;mode=retain,@docker/default-whitelist,mbind&quot;, ] [alias."/>
+<meta name="twitter:text:title" content="Concurrent use of Multiple Conda Environments"/>
+<meta name="twitter:title" content="Concurrent use of Multiple Conda Environments"/>
+<meta name="twitter:description" content="Conda is a platform-neutral packaging system. The BioConda channel is of particular interest for bioinformatics users, as it provides access to an enormous library of ready-to-use bioinformatics applications, which can be otherwise notoriously difficult to install.
+One of the problems solved by Conda, and BioConda, is the dependency hell which results from trying to install several applications, which have requirements for incompatible versions of their dependencies, for example different versions of samtools."/>
 
 
     
@@ -248,9 +245,9 @@ Noting the slightly non-standard security requirements needed by the Julia inter
         
 
         <header class="article-header">
-    <a href="http://www.coldharbourdigital.com/blog/2017/05/04/containerized-script-interpreters-including-julia/">
+    <a href="http://www.coldharbourdigital.com/blog/2018/04/12/concurrent-use-of-multiple-conda-environments/">
     <h1 class="article-title" itemprop="name">
-        Containerized script interpreters, including Julia
+        Concurrent use of Multiple Conda Environments
     </h1>
     </a>
     <div class="article-meta">
@@ -258,9 +255,9 @@ Noting the slightly non-standard security requirements needed by the Julia inter
         
         <div class="article-date">
             <i class="fa fa-calendar"></i>
-            <time datetime="2017-05-04 17:30:00 &#43;1200 NZST" itemprop="datePublished">2017-05-04</time>
+            <time datetime="2018-04-12 14:23:00 &#43;1200 NZST" itemprop="datePublished">2018-04-12</time>
             &middot;
-            399
+            411
             words
             &middot;
             2
@@ -279,11 +276,15 @@ Noting the slightly non-standard security requirements needed by the Julia inter
                 <i class="fa fa-tags"></i>
                 
                 
-                <a class="article-category-link" href="http://www.coldharbourdigital.com/blog/tags/rkt">rkt</a>
+                <a class="article-category-link" href="http://www.coldharbourdigital.com/blog/tags/conda">conda</a>
                 &middot;
                 
                 
-                <a class="article-category-link" href="http://www.coldharbourdigital.com/blog/tags/rktrunner">rktrunner</a>
+                <a class="article-category-link" href="http://www.coldharbourdigital.com/blog/tags/bioconda">bioconda</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="http://www.coldharbourdigital.com/blog/tags/public-wrappers">public-wrappers</a>
                 
                 
             </div>
@@ -293,63 +294,62 @@ Noting the slightly non-standard security requirements needed by the Julia inter
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            <p>The ability to easily run containerized applications using <a href="https://coreos.com/rkt">rkt</a> is quite intoxicating, and quickly leads on to an exploration of what applications are readily available.  <a href="https://hub.docker.com/">Docker Hub</a> and <a href="https://quay.io/">Quay</a> are worth exploring.  Among those applications on Docker Hub are <a href="https://hub.docker.com/_/julia/">Julia</a> and <a href="https://hub.docker.com/_/ruby/">Ruby</a>.</p>
+            <p><a href="https://conda.io/">Conda</a> is a platform-neutral packaging system.  The <a href="https://bioconda.github.io/">BioConda channel</a> is of particular interest for bioinformatics users, as it provides access to an enormous library of ready-to-use bioinformatics applications, which can be otherwise notoriously difficult to install.</p>
 
-<p>Noting the <a href="https://github.com/rkt/rkt/issues/3651">slightly non-standard security requirements</a> needed by the Julia interpreter, we can configure <a href="https://github.com/tesujimath/rktrunner">rktrunner</a> to run Julia using this configuration file snippet:</p>
+<p>One of the problems solved by Conda, and BioConda, is the dependency hell which results from trying to install several applications, which have requirements for incompatible versions of their dependencies, for example different versions of <a href="https://github.com/samtools/samtools">samtools</a>.  By installing into different conda environments, such applications can coexist.  However, there is a problem.</p>
 
-<pre><code class="language-toml">[options.common]
-image = [
-    &quot;--seccomp&quot;, &quot;mode=retain,@docker/default-whitelist,mbind&quot;,
+<p>Only one conda environment may be active at any one time.  So for some bioinformatics pipeline wanting to run programs from different environments, it would seem necessary to activate and deactivate conda environments dynamically, to get access to their programs.  However, this is not the case, by virtue of <a href="https://github.com/gqmelo/exec-wrappers">exec-wrappers</a> and <a href="https://github.com/tesujimath/public-wrappers">public-wrappers</a>.  (In the interest of full disclosure, <a href="https://github.com/tesujimath/public-wrappers">public-wrappers</a> was written by this author.)</p>
+
+<p><a href="https://github.com/gqmelo/exec-wrappers">Exec-wrappers</a> exists to create efficient wrapper scripts for programs in conda (or other) environments.  What it does is equivalent to on-the-fly environment activation, albeit very much faster.  <a href="https://github.com/tesujimath/public-wrappers">Public-wrappers</a> builds on this, to provide a means of publishing certain programs from a conda (or other) environment, into a public scripts directory.</p>
+
+<p>By making accessible in the public script directory only certain programs, any incompatible dependencies are hidden from the user and each other, by virtue of not being on the path.  They are only accessible by the top-level application for the duration of execution of its wrapper script.</p>
+
+<p><a href="https://github.com/tesujimath/public-wrappers">Public-wrappers</a> uses a configuration file to define which programs from which environments should be public.  For example.</p>
+
+<pre><code class="language-toml">[conda.bifo-essential]
+wrapperdir = &quot;/stash/miniconda3/envs/bifo-essential/public-wrappers&quot;
+envdir = &quot;/stash/miniconda3/envs/bifo-essential&quot;
+public = [
+    &quot;blast&quot;,
+    &quot;bwa&quot;,
+    &quot;samtools&quot;,
 ]
 
-[alias.julia_]
-image = &quot;docker://julia&quot;
-exec = [&quot;/usr/local/julia/bin/julia&quot;]
+[conda.bifo-interactive]
+wrapperdir = &quot;/stash/miniconda3/envs/bifo-interactive/public-wrappers&quot;
+envdir = &quot;/stash/miniconda3/envs/bifo-interactive&quot;
+public = [
+    &quot;igv&quot;,
+]
 </code></pre>
 
-<p>Note that this snippet makes use of a <em>rktrunner alias</em>, so that we can invoke containerized Julia very easily.</p>
+<p>With this configuration file in <code>public-wrappers.toml</code>, for example, the following command is sufficient to generate the desired public wrapper scripts.</p>
 
-<pre><code class="language-shell">$ rkt-run -i julia
-               _
-   _       _ _(_)_     |  A fresh approach to technical computing
-  (_)     | (_) (_)    |  Documentation: http://docs.julialang.org
-   _ _   _| |_  __ _   |  Type &quot;?help&quot; for help.
-  | | | | | | |/ _` |  |
-  | | |_| | | | (_| |  |  Version 0.5.1 (2017-03-05 13:25 UTC)
- _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release
-|__/                   |  x86_64-pc-linux-gnu
-
-julia&gt;
+<pre><code class="language-shell">$ configure-public-wrappers -c public-wrappers.toml
 </code></pre>
 
-<p>The <em>julia</em> alias is defined to rktrunner by virtue of being the basename of the path <code>/usr/local/julia/bin/julia</code> given in the config file.  As usual, if you want to see what rktrunner is actually passing through to the <code>rkt run</code> command, use <code>rkt-run -v</code>.</p>
+<p>For ease of use, it is recommended to deploy a file such as the following in <code>/etc/profile.d</code></p>
 
-<p>So far so good, but how to use this as a script interpreter?</p>
-
-<p>Ideally, we would like to be able to simply run a Julia script simply by invoking it from the command line.  Suppose the following file is called <code>hello-world.jl</code>, is executable, and is on the path:</p>
-
-<pre><code class="language-bash">#!/usr/bin/env julia
-println(&quot;Hello Julia world!&quot;)
+<pre><code class="language-shell"># include public wrappers on path, where they exist
+for env in `ls -r /stash/miniconda3/envs 2&gt;/dev/null`; do
+    test -d /stash/miniconda3/envs/$env/public-wrappers &amp;&amp; {
+        PATH=/stash/miniconda3/envs/$env/public-wrappers:$PATH
+    }
+done
+export PATH
 </code></pre>
 
-<p>What do we need in place to be able to invoke it as <code>hello-world.jl</code>?  We simply need an executable called <em>julia</em> installed somewhere on the path, which will be invoked with the name of the script file as an argument, and will in turn invoke <code>rkt-run julia &lt;scriptfile&gt;</code>.</p>
+<p>This simply prepends the public wrappers directories onto the path, so that users have immediate access to all programs published in the public wrappers configuration file.</p>
 
-<p>In fact, rktrunner comes with just such an executable, called <em>rkt-run-helper</em>, which looks at its own name to determine which alias to use.  So it is sufficient to setup a symlink called <em>julia</em> somewhere on the path, like this (exact details depending on where <em>rkt-run-helper</em> has been installed):</p>
+<p><a href="https://github.com/tesujimath/public-wrappers">Public-wrappers</a> is on both <a href="https://pypi.python.org/pypi/public-wrappers">PyPI</a> and <a href="https://conda-forge.org/">conda-forge</a>, so may be installed easily by either of the following commands.</p>
 
-<pre><code class="language-shell">$ ls -l julia
-lrwxrwxrwx 1 root root 37 Apr 20 12:08 julia -&gt; /usr/libexec/rktrunner/rkt-run-helper
-
-</code></pre>
-
-<p>And once this is in place, we have just what we wanted, and can run Julia scripts using the containerized Julia interpreter.</p>
-
-<pre><code class="language-shell">$ ./hello-world.jl 
-Hello Julia world!
+<pre><code class="language-shell">$ pip install public-wrappers
+$ conda install public-wrappers
 </code></pre>
 
         </div>
         <footer class="article-footer">
-    <a data-url="http://www.coldharbourdigital.com/blog/2017/05/04/containerized-script-interpreters-including-julia/" data-id="4dcf46020a6fc70f741d2dde146f1562" class="article-share-link">
+    <a data-url="http://www.coldharbourdigital.com/blog/2018/04/12/concurrent-use-of-multiple-conda-environments/" data-id="a6767551f04cf6eaf63911454bd500ad" class="article-share-link">
         <i class="fa fa-share"></i>
         Share
     </a>
@@ -426,21 +426,14 @@ Hello Julia world!
     
 <nav id="article-nav">
     
-    <a href="http://www.coldharbourdigital.com/blog/2017/04/28/using-containers-behind-an-authenticating-web-proxy/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="http://www.coldharbourdigital.com/blog/2017/06/24/reusing-rkt-pods-in-a-bioinformatics-pipeline/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">
           Older
       </strong>
-      <div class="article-nav-title">Using containers behind an authenticating web proxy</div>
+      <div class="article-nav-title">Reusing rkt pods in a BioInformatics pipeline</div>
     </a>
     
 
-    
-    <a href="http://www.coldharbourdigital.com/blog/2017/05/05/piping-output-between-containerized-applications/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">
-          Newer
-      </strong>
-      <div class="article-nav-title">Piping output between containerized applications</div>
-    </a>
     
 </nav>
 
